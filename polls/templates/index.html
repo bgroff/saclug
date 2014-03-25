@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Welcome to SacLug's Polling Site!
+{% endblock title %}
+
+{% block content %}
+    <p>Select a poll below to vote. Once you have voted, you can see the results.</p>
+
+    <ul>
+        {% for poll in polls %}
+            <li><a href="{% url 'vote' poll.pk %}">{{ poll.question }}</a></li>
+        {% empty %}
+            <li>Sorry, there are no polls.</li>
+        {% endfor %}
+    </ul>
+{% endblock content %}
