@@ -5,13 +5,22 @@
 {% endblock title %}
 
 {% block content %}
-    <p>Select a poll below to vote. Once you have voted, you can see the results.</p>
-
-    <ul>
-        {% for poll in polls %}
-            <li><a href="{% url 'vote' poll.pk %}">{{ poll.question }}</a></li>
-        {% empty %}
-            <li>Sorry, there are no polls.</li>
-        {% endfor %}
-    </ul>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Select a poll below to vote. Once you have voted, you can see the results.
+                </div>
+                <div class="panel-body">
+                    <ul>
+                        {% for poll in polls %}
+                            <li><a href="{% url 'vote' poll.pk %}">{{ poll }}</a></li>
+                        {% empty %}
+                            <li>Sorry, there are no polls.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock content %}

@@ -5,9 +5,21 @@
 {% endblock title %}
 
 {% block content %}
-    <ul>
-        {% for choice in poll.choice_set.all %}
-            <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
-        {% endfor %}
-    </ul>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Here are the results for the "{{ poll.question }}" poll.
+                </div>
+                <div class="panel-body">
+                    <ul>
+                        {% for choice in poll.choice_set.all %}
+                            <li>{{ choice.choice_text }} -- <strong>{{ choice.votes }}
+                                vote{{ choice.votes|pluralize }}</strong></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock content %}

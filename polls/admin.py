@@ -1,5 +1,16 @@
 from django.contrib import admin
 from polls.models import Poll, Choice
 
-admin.site.register(Poll)
-admin.site.register(Choice)
+
+class ChoiceInline(admin.TabularInline):
+    model = Choice
+    exclude = ('votes',)
+
+
+class PollAdmin(admin.ModelAdmin):
+    inlines = [
+        ChoiceInline,
+    ]
+    exclude = ('pub_date',)
+
+admin.site.register(Poll, PollAdmin)

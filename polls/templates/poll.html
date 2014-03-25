@@ -6,15 +6,31 @@
 
 {% block content %}
     {% if error_message %}
-        <div class="alter alert-danger">{{ error_message }}</div>
+        <div class="alert alert-danger">
+            {{ error_message }}
+        </div>
     {% endif %}
 
-    <form action="{% url 'vote' poll.id %}" method="post">
-        {% csrf_token %}
-            {% for choice in poll.choice_set.all %}
-                <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
-                <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />
-            {% endfor %}
-        <input class="btn btn-large btn-primary" type="submit" value="Vote" />
-    </form>
+    <div class="row">
+        <form action="{% url 'vote' poll.id %}" method="post">
+            {% csrf_token %}
+            <div class="col-sm-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        Select a choice below and click on the "Vote" button to submit. You can see the results after
+                        you vote.
+                    </div>
+                    <div class="panel-body">
+                        {% for choice in poll.choice_set.all %}
+                            <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}"/>
+                            <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br/>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="well">
+                    <input class="btn btn-large btn-primary" type="submit" value="Vote"/>
+                </div>
+            </div>
+        </form>
+    </div>
 {% endblock content %}
